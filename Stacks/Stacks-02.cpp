@@ -90,7 +90,7 @@ int main()
     s.push(30);
     s.push(40);
     s.push(50);
-    // s.push(60); // Stack Overflow
+    // s.push(60); // Stack Overflow, Can,t add element
 
     // Printing elements of stack
     while (!s.isEmpty())
