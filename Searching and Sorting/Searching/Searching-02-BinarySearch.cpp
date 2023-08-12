@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int binarySearch(int arr[], int size, int target)
@@ -47,6 +49,29 @@ int main()
     else
     {
         cout << "Target found at " << indexOfElement << " index" << endl;
+    }
+
+    vector<int> v{1, 2, 3, 4, 5, 6, 7};
+
+    if (binary_search(v.begin(), v.end(), 5))
+    {
+        cout << "Found" << endl;
+    }
+    else
+    {
+        cout << "Not Found" << endl;
+    }
+
+    int brr[] = {10, 20, 30, 40, 50, 60, 70};
+    int n = sizeof(brr) / sizeof(brr[0]);
+
+    if (binary_search(brr, brr + n, 70))
+    {
+        cout << "Element found" << endl;
+    }
+    else
+    {
+        cout << "Element not found" << endl;
     }
 
     return 0;
