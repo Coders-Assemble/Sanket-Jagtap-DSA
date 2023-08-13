@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int firstOcc(vector<int> &arr, int target)
@@ -41,6 +42,11 @@ int main()
     int indexOfElement = firstOcc(v, target);
 
     cout << "First occurence of " << target << " is at " << indexOfElement << endl;
+
+    // Using inbuild function - lower_bound
+
+    auto ans2 = lower_bound(v.begin(), v.end(), target);
+    cout << "Ans 2: " << (ans2 - v.begin()) << endl;
 
     return 0;
 }
