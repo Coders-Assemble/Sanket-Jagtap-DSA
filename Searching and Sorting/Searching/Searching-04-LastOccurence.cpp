@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int lastOcc(vector<int> &arr, int target)
@@ -41,6 +42,11 @@ int main()
     int indexOfElement = lastOcc(v, target);
 
     cout << "Last occurence of " << target << " is at " << indexOfElement << endl;
+
+    // Using inbuild function - upper_bound
+
+    auto ans2 = upper_bound (v.begin(), v.end(), target);
+    cout << "Ans 2: " << (ans2 - v.begin()) << endl;
 
     return 0;
 }
