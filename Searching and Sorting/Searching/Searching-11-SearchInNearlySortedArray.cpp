@@ -18,10 +18,10 @@ int binarySearch(vector<int> arr, int target)
         if (arr[m - 1] == target)
             return m - 1;
 
-        if (arr[m + 1] == target)
+        if (m <= e && arr[m + 1] == target)
             return m + 1;
 
-        if (target > arr[m])
+        if (m >= s && target > arr[m])
             s = m + 2;
         else
             e = m - 2;
