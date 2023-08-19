@@ -13,7 +13,7 @@ int firstOcc(vector<int> &arr, int target)
 
     while (start <= end)
     {
-        if (arr[mid] == target)
+        if (arr[mid] >= target)
         {
             // index store
             ans = mid;
@@ -41,7 +41,14 @@ int main()
 
     int indexOfElement = firstOcc(v, target);
 
-    cout << "First occurence of " << target << " is at " << indexOfElement << endl;
+    if (indexOfElement == -1)
+    {
+        cout << "First occurence of " << target << " is at " << v.size() << endl;
+    }
+    else
+    {
+        cout << "First occurence of " << target << " is at " << indexOfElement << endl;
+    }
 
     // Using inbuild function - lower_bound
 
