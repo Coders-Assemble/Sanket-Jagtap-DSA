@@ -13,7 +13,7 @@ int lastOcc(vector<int> &arr, int target)
 
     while (start <= end)
     {
-        if (arr[mid] == target)
+        if (arr[mid] <= target)
         {
             // index store
             ans = mid;
@@ -41,11 +41,18 @@ int main()
 
     int indexOfElement = lastOcc(v, target);
 
-    cout << "Last occurence of " << target << " is at " << indexOfElement << endl;
+    if (indexOfElement == -1)
+    {
+        cout << "Last occurence of " << target << " is at " << 0 << endl;
+    }
+    else
+    {
+        cout << "Last occurence of " << target << " is at " << indexOfElement << endl;
+    }
 
     // Using inbuild function - upper_bound
 
-    auto ans2 = upper_bound (v.begin(), v.end(), target);
+    auto ans2 = upper_bound(v.begin(), v.end(), target);
     cout << "Ans 2: " << (ans2 - v.begin()) << endl;
 
     return 0;
