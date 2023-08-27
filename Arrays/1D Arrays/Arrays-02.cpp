@@ -2,17 +2,20 @@
 #include <limits.h>
 using namespace std;
 
-bool findElement(int arr[], int size, int key) {
-  for (int i = 0; i < size; i++) {
-    if (arr[i] == key) {
+bool findElement(int arr[], int size, int key)
+{
+  for (int i = 0; i < size; i++)
+  {
+    if (arr[i] == key)
+    {
       return true;
     }
   }
   return false;
 }
 
-int main() {
-
+int main()
+{
   // Linear Search
   // int arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
   // int size = 9;
@@ -99,14 +102,16 @@ int main() {
   int start = 0;
   int end = size - 1;
 
-  while (start <= end) {
+  while (start <= end)
+  {
 
     swap(arr[start], arr[end]);
     start++;
     end--;
   }
   // Printing array
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < size; i++)
+  {
     cout << arr[i] << " ";
   }
   cout << endl;
