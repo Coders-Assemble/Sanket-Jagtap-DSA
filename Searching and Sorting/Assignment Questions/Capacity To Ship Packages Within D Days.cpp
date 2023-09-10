@@ -4,16 +4,21 @@
 using namespace std;
 
 // Approach 01
-class Solution {
+class Solution
+{
 public:
-    int findDays(vector<int>& arr, int cap){
+    int findDays(vector<int> &arr, int cap)
+    {
         int day = 1;
         int rem_cap = cap;
-        for(int i=0; i<arr.size(); i++){
-            if(arr[i] <= rem_cap){
+        for (int i = 0; i < arr.size(); i++)
+        {
+            if (arr[i] <= rem_cap)
+            {
                 rem_cap -= arr[i];
             }
-            else{
+            else
+            {
                 day++;
                 rem_cap = cap;
                 rem_cap -= arr[i];
@@ -21,11 +26,13 @@ public:
         }
         return day;
     }
-    int shipWithinDays(vector<int>& weights, int days) {
+    int shipWithinDays(vector<int> &weights, int days)
+    {
 
         int sum = 0;
         int max_ele = INT_MIN;
-        for(int i=0; i<weights.size(); i++){
+        for (int i = 0; i < weights.size(); i++)
+        {
             sum += weights[i];
             max_ele = max(max_ele, weights[i]);
         }
@@ -34,19 +41,78 @@ public:
         int high = sum;
         int ans = INT_MAX;
 
-        while(low <= high){
-            int mid = (low + high)/2;
+        while (low <= high)
+        {
+            int mid = (low + high) / 2;
 
             int d = findDays(weights, mid);
 
-            if(d <= days){
+            if (d <= days)
+            {
                 ans = mid;
                 high = mid - 1;
             }
-            else{
+            else
+            {
                 low = mid + 1;
             }
         }
         return ans;
+    }
+};
+
+// Approach 02
+class Solution
+{
+public:
+    int findDays(vector<int> &arr, int cap)
+    {
+        int day = 1;
+        int load = 0;
+        for (int i = 0; i < arr.size(); i++)
+        {
+            if (load + arr[i] > cap)
+            {
+                day++;
+                load = 0;
+                load += arr[i];
+            }
+            else
+            {
+                load += arr[i];
+            }
+        }
+        return day;
+    }
+    int shipWithinDays(vector<int> &weights, int days)
+    {
+
+        int sum = 0;
+        int max_ele = INT_MIN;
+        for (int i = 0; i < weights.size(); i++)
+        {
+            sum += weights[i];
+            max_ele = max(max_ele, weights[i]);
+        }
+
+        int low = max_ele;
+        int high = sum;
+
+        while (low <= high)
+        {
+            int mid = (low + high) / 2;
+
+            int d = findDays(weights, mid);
+
+            if (d <= days)
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        return low;
     }
 };
