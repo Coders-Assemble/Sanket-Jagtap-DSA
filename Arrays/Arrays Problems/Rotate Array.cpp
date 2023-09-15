@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-// Rotate Array by 1 place
+// Rotate an Array by 1 place
 vector<int> rotateArray(vector<int> &arr, int n)
 {
     int temp = arr[0];
