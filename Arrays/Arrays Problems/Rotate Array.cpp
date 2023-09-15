@@ -51,3 +51,56 @@ vector<int> rotateArray(vector<int> arr, int k)
 
     return arr;
 }
+
+// Right Rotate - Brute force
+// class Solution
+// {
+// public:
+//     void rotate(vector<int> &nums, int k)
+//     {
+//         int n = nums.size();
+//         k = k % n;
+
+//         if (k == 0)
+//             return;
+//         if (n == 1)
+//             return;
+
+//         int temp[k];
+//         int j = 0;
+//         for (int i = n - k; i < n; i++)
+//         {
+//             temp[j] = nums[i];
+//             j++;
+//         }
+
+//         for (int i = n - 1; i >= k; i--)
+//         {
+//             nums[i] = nums[i - k];
+//         }
+
+//         for (int i = 0; i < k; i++)
+//         {
+//             nums[i] = temp[i];
+//         }
+//     }
+// };
+
+// Right Rotate - Optimal
+class Solution
+{
+public:
+    void rotate(vector<int> &arr, int k)
+    {
+        int n = arr.size();
+        if (n == 1)
+            return;
+        k = k % n;
+        if (k == 0)
+            return;
+        reverse(arr.begin(), arr.begin() + n);
+        reverse(arr.begin(), arr.begin() + k);
+        reverse(arr.begin() + k, arr.begin() + n);
+    }
+};
+
