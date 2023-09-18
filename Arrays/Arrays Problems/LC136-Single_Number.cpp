@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 using namespace std;
 
 // Brute force - TLE
@@ -19,6 +20,29 @@ public:
             if (count == 1)
             {
                 return nums[i];
+            }
+        }
+        return -1;
+    }
+};
+
+// Better approach
+class Solution
+{
+public:
+    int singleNumber(vector<int> &nums)
+    {
+        map<int, int> mpp;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            mpp[nums[i]]++;
+        }
+
+        for (auto it : mpp)
+        {
+            if (it.second == 1)
+            {
+                return it.first;
             }
         }
         return -1;
