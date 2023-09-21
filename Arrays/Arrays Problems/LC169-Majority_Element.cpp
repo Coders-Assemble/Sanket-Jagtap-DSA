@@ -31,3 +31,27 @@ public:
         return -1;
     }
 };
+
+// Better approach - using map
+// TC => O(nlogn) + O(n)
+// SC => O(n)
+int majorityElement(vector<int> nums)
+{
+    int n = nums.size();
+
+    map<int, int> mpp;
+    for (int i = 0; i < n; i++)
+    {
+        int num = nums[i];
+        mpp[num]++;
+    }
+
+    for (auto it : mpp)
+    {
+        if (it.second > n / 2)
+        {
+            return it.first;
+        }
+    }
+    return -1;
+}
