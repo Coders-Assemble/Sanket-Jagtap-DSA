@@ -30,7 +30,7 @@ int main()
 }
 
 // Type - 2
-// Print any Nth row of Pascal's Triangle
+// Given n, Print Nth row of Pascal's Triangle
 // TC => O(N)
 // SC => O(1)
 
