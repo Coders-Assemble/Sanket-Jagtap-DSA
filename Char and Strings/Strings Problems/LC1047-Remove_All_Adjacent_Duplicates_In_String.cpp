@@ -60,3 +60,29 @@ public:
         return str;
     }
 };
+
+// Optimal Approach - 02
+// TC => O(N)
+// SC => O(N)
+
+class Solution
+{
+public:
+    string removeDuplicates(string s)
+    {
+        string str = "";
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (!str.empty() && str.back() == s[i])
+            {
+                str.pop_back();
+            }
+            else
+            {
+                str.push_back(s[i]);
+            }
+        }
+        return str;
+    }
+};
