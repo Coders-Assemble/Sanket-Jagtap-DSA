@@ -62,6 +62,10 @@ public:
     // void setWeight(int w) { weight = w; }
     void setWeight(int weight) { this->weight = weight; }
 
+    void print(){
+        cout<<this->age<<" "<<this->weight<<" "<<this->name<<endl;
+    }
+
     ~Animal() { cout << "Destructor is called" << endl; }
 };
 
@@ -119,6 +123,20 @@ int main()
     // Animal c = a;
 
     // Animal d(*b);
+
+    // Animal animal1;
+    // animal1.age = 15;
+    // animal1.setWeight(55);
+    // animal1.name = "Sheru";
+
+    // Animal animal2 = animal1;
+    // cout<<"animal1: ";
+    // animal1.print();
+    // cout<<"animal2: ";
+    // animal2.print();
+    // animal1.name[0] = 'P';
+    // animal1.print();
+    // animal2.print();
 
     cout << "a obj creation" << endl;
     Animal a;
