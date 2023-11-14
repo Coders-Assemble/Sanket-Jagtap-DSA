@@ -2,6 +2,10 @@
 #include <vector>
 using namespace std;
 
+// Dutch National Flag Algorithm
+// TC => O(N)
+// SC => O(1)
+
 void moveAllNegToLeft(vector<int> &v)
 {
     int low = 0;
