@@ -2,6 +2,10 @@
 #include <unordered_map>
 using namespace std;
 
+// Using HashMap
+// TC => O(n)
+// SC => O(n)
+
 class Solution
 {
 public:
