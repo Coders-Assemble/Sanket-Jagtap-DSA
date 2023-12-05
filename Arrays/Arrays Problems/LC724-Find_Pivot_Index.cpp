@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <numeric>
 using namespace std;
 
 // TC => O(n^2)
@@ -49,11 +50,12 @@ public:
         int n = nums.size();
 
         int leftSum = 0;
-        int totalSum = 0;
-        for (int i = 0; i < n; i++)
-        {
-            totalSum += nums[i];
-        }
+        // int totalSum = 0;
+        // for (int i = 0; i < n; i++)
+        // {
+        //     totalSum += nums[i];
+        // }
+        int totalSum = accumulate(nums.begin(), nums.end(), 0);
         int rightSum = totalSum - nums[0];
 
         for (int i = 0; i < n; i++)
