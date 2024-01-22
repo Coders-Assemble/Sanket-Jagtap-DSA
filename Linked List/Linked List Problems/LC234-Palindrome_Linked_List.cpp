@@ -2,6 +2,9 @@
 #include <vector>
 using namespace std;
 
+// TC => O(n)
+// SC => O(n)
+
 // Definition for singly-linked list.
 struct ListNode
 {
@@ -37,6 +40,67 @@ public:
             }
             i++;
             j--;
+        }
+
+        return true;
+    }
+};
+
+// TC => O(n)
+// SC => O(1)
+
+class Solution
+{
+public:
+    ListNode *reverse(ListNode *head)
+    {
+
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+        ListNode *next = curr->next;
+
+        while (curr != NULL)
+        {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+    bool isPalindrome(ListNode *head)
+    {
+        if (head->next == NULL)
+            return true;
+
+        ListNode *slow = head;
+        ListNode *fast = head->next;
+
+        while (fast != NULL)
+        {
+            fast = fast->next;
+            if (fast != NULL)
+            {
+                fast = fast->next;
+                slow = slow->next;
+            }
+        }
+
+        ListNode *reverseListHead = reverse(slow->next);
+
+        ListNode *temp1 = head;
+        ListNode *temp2 = reverseListHead;
+
+        while (temp2 != NULL)
+        {
+            if (temp1->val != temp2->val)
+            {
+                return false;
+            }
+            temp1 = temp1->next;
+            temp2 = temp2->next;
         }
 
         return true;
