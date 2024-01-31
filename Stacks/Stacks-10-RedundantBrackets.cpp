@@ -23,9 +23,13 @@ public:
                 else
                 {
                     while (st.top() == '+' || st.top() == '-' || st.top() == '*' || st.top() == '/')
+                    {
                         st.pop();
+                    }
                     if (st.top() == '(')
+                    {
                         st.pop();
+                    }
                 }
             }
         }
