@@ -68,3 +68,74 @@ public:
         return v;
     }
 };
+
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    vector<int> nextLargerNodes(ListNode *head)
+    {
+        vector<int> ll;
+        while (head)
+        {
+            ll.push_back(head->val);
+            head = head->next;
+        }
+
+        stack<int> st;
+        vector<int> ans(ll.size());
+
+        for (int i = 0; i < ll.size(); i++)
+        {
+            while (!st.empty() && ll[i] > ll[st.top()])
+            {
+                int kids = st.top();
+                st.pop();
+                ans[kids] = ll[i];
+            }
+            st.push(i);
+        }
+
+        return ans;
+    }
+};
+
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    vector<int> nextLargerNodes(ListNode *head)
+    {
+        vector<int> ll;
+        while (head)
+        {
+            ll.push_back(head->val);
+            head = head->next;
+        }
+
+        stack<int> st;
+
+        for (int i = 0; i < ll.size(); i++)
+        {
+            while (!st.empty() && ll[i] > ll[st.top()])
+            {
+                int kids = st.top();
+                st.pop();
+                ll[kids] = ll[i];
+            }
+            st.push(i);
+        }
+
+        while (!st.empty())
+        {
+            ll[st.top()] = 0;
+            st.pop();
+        }
+
+        return ll;
+    }
+};
