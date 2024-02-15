@@ -28,6 +28,24 @@ vector<int> prevSmallerElement(vector<int> &input)
     return ans;
 }
 
+vector<int> prevSmallerElement2(vector<int> &input)
+{
+    int n = input.size();
+    vector<int> ans(n, -1);
+    stack<int> st;
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        while (!st.empty() && input[st.top()] > input[i])
+        {
+            ans[st.top()] = input[i];
+            st.pop();
+        }
+        st.push(i);
+    }
+    return ans;
+}
+
 int main()
 {
     vector<int> input;
@@ -38,11 +56,17 @@ int main()
     input.push_back(3);
 
     vector<int> ans = prevSmallerElement(input);
+    vector<int> ans1 = prevSmallerElement2(input);
 
     cout << "Printing the Output vector" << endl;
     for (int i = 0; i < input.size(); i++)
     {
         cout << ans[i] << " ";
+    }
+
+    for (int i = 0; i < input.size(); i++)
+    {
+        cout << ans1[i] << " ";
     }
 
     return 0;
