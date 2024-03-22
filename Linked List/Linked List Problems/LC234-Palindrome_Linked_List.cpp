@@ -106,3 +106,46 @@ public:
         return true;
     }
 };
+
+// TC => O(n)
+// SC => O(1)
+
+class Solution
+{
+public:
+    bool isPalindrome(ListNode *head)
+    {
+        if (head->next == NULL)
+            return true;
+
+        ListNode *prev = NULL;
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while (fast && fast->next)
+        {
+            fast = fast->next->next;
+            ListNode *temp = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = temp;
+        }
+
+        if (fast != NULL)
+        {
+            slow = slow->next;
+        }
+
+        while (prev && slow)
+        {
+            if (prev->val != slow->val)
+            {
+                return false;
+            }
+            prev = prev->next;
+            slow = slow->next;
+        }
+
+        return true;
+    }
+};
