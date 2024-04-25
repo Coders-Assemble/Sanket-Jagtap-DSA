@@ -70,7 +70,7 @@ void postOrder(Node *root)
     // Left
     postOrder(root->left);
     // Right
-    preOrder(root->right);
+    postOrder(root->right);
     // Node
     cout << root->data << " ";
 }
