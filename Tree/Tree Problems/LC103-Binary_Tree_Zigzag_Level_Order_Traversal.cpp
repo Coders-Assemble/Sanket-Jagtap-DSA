@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 #include <queue>
 using namespace std;
 
@@ -52,5 +53,61 @@ public:
             result.push_back(row);
         }
         return result;
+    }
+};
+
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode *root)
+    {
+        stack<TreeNode *> leftToRight;
+        stack<TreeNode *> rightToLeft;
+
+        vector<vector<int>> ans;
+        if (root == NULL)
+            return ans;
+
+        leftToRight.push(root);
+
+        while (!leftToRight.empty() || !rightToLeft.empty())
+        {
+            if (!leftToRight.empty())
+            {
+                vector<int> nthLevelNodes;
+                while (!leftToRight.empty())
+                {
+                    TreeNode *temp = leftToRight.top();
+                    leftToRight.pop();
+
+                    nthLevelNodes.push_back(temp->val);
+                    if (temp->left)
+                        rightToLeft.push(temp->left);
+                    if (temp->right)
+                        rightToLeft.push(temp->right);
+                }
+                ans.push_back(nthLevelNodes);
+            }
+            else
+            {
+                vector<int> nthLevelNodes;
+                while (!rightToLeft.empty())
+                {
+                    TreeNode *temp = rightToLeft.top();
+                    rightToLeft.pop();
+
+                    nthLevelNodes.push_back(temp->val);
+                    if (temp->right)
+                        leftToRight.push(temp->right);
+                    if (temp->left)
+                        leftToRight.push(temp->left);
+                }
+                ans.push_back(nthLevelNodes);
+            }
+        }
+        return ans;
     }
 };
