@@ -72,3 +72,52 @@ public:
         return ans;
     }
 };
+
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    void findLeftRightPos(Node *root, int pos, int &left, int &right)
+    {
+        if (!root)
+            return;
+
+        left = min(left, pos);
+        right = max(right, pos);
+
+        findLeftRightPos(root->left, pos - 1, left, right);
+        findLeftRightPos(root->right, pos + 1, left, right);
+    }
+
+    void Tview(Node *root, int pos, vector<int> &ans, vector<int> &level, int l)
+    {
+        if (!root)
+            return;
+
+        if (level[pos] > l)
+        {
+            ans[pos] = root->data;
+            level[pos] = l;
+        }
+
+        Tview(root->left, pos - 1, ans, level, l + 1);
+        Tview(root->right, pos + 1, ans, level, l + 1);
+    }
+
+    vector<int> topView(Node *root)
+    {
+        int left = 0, right = 0;
+        findLeftRightPos(root, 0, left, right);
+
+        vector<int> ans(right - left + 1);
+        vector<int> level(right - left + 1, INT_MAX);
+
+        Tview(root, -1 * left, ans, level, 0);
+
+        return ans;
+    }
+};
