@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 using namespace std;
 
 // TC = > O(n)
@@ -36,6 +37,40 @@ public:
     {
         vector<int> ans;
         postOrder(root, ans);
+        return ans;
+    }
+};
+
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    vector<int> postorderTraversal(TreeNode *root)
+    {
+        vector<int> ans;
+        if (!root)
+            return ans;
+
+        stack<TreeNode *> s;
+        s.push(root);
+
+        while (!s.empty())
+        {
+            TreeNode *temp = s.top();
+            s.pop();
+
+            ans.push_back(temp->val);
+
+            if (temp->left)
+                s.push(temp->left);
+            if (temp->right)
+                s.push(temp->right);
+        }
+
+        reverse(ans.begin(), ans.end());
+
         return ans;
     }
 };
