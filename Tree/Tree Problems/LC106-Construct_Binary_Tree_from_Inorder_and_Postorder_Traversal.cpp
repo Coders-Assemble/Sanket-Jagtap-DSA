@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 // TC => O(n^2)
@@ -56,3 +57,50 @@ public:
     }
 };
 
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    int find(unordered_map<int, int> &mpp, int target)
+    {
+        auto it = mpp.find(target);
+        if (it != mpp.end())
+        {
+            return it->second;
+        }
+        return -1;
+    }
+
+    TreeNode *Tree(vector<int> &in, vector<int> &post, int inStart, int inEnd, int index, unordered_map<int, int> &mpp)
+    {
+        if (inStart > inEnd)
+        {
+            return NULL;
+        }
+
+        TreeNode *root = new TreeNode(post[index]);
+        int pos = find(mpp, post[index]);
+
+        // right
+        root->right = Tree(in, post, pos + 1, inEnd, index - 1, mpp);
+
+        // left
+        root->left = Tree(in, post, inStart, pos - 1, index - (inEnd - pos) - 1, mpp);
+
+        return root;
+    }
+
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
+    {
+        unordered_map<int, int> mpp;
+        int n = inorder.size();
+        for (int i = 0; i < n; i++)
+        {
+            mpp[inorder[i]] = i;
+        }
+
+        return Tree(inorder, postorder, 0, n - 1, n - 1, mpp);
+    }
+};
