@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <queue>
 using namespace std;
 
 // TC => O(n)
@@ -85,5 +87,94 @@ public:
         int height = Height(BurnNode) - 1;
 
         return max(height, time);
+    }
+};
+
+// TC => O(n)
+// SC => O(n)
+
+class Solution
+{
+public:
+    Node *findBurnNodeAndMakeMapping(Node *root, unordered_map<Node *, Node *> &parentMap, int target)
+    {
+        queue<Node *> q;
+        q.push(root);
+        Node *BurnNode = NULL;
+
+        while (!q.empty())
+        {
+            Node *temp = q.front();
+            q.pop();
+
+            if (temp->data == target)
+                BurnNode = temp;
+
+            if (temp->left)
+            {
+                parentMap[temp->left] = temp;
+                q.push(temp->left);
+            }
+
+            if (temp->right)
+            {
+                parentMap[temp->right] = temp;
+                q.push(temp->right);
+            }
+        }
+
+        return BurnNode;
+    }
+
+    int BurnTree(Node *BurnNode, unordered_map<Node *, Node *> &parentMap)
+    {
+        unordered_map<Node *, bool> isAlreadyBurned;
+        queue<Node *> q;
+        q.push(BurnNode);
+        isAlreadyBurned[BurnNode] = true;
+        int time = 0;
+
+        while (!q.empty())
+        {
+            int size = q.size();
+            bool isBurnSpreaded = false;
+            for (int i = 0; i < size; i++)
+            {
+                Node *temp = q.front();
+                q.pop();
+
+                if (temp->left && !isAlreadyBurned[temp->left])
+                {
+                    q.push(temp->left);
+                    isAlreadyBurned[temp->left] = true;
+                    isBurnSpreaded = true;
+                }
+
+                if (temp->right && !isAlreadyBurned[temp->right])
+                {
+                    q.push(temp->right);
+                    isAlreadyBurned[temp->right] = true;
+                    isBurnSpreaded = true;
+                }
+
+                if (parentMap[temp] && !isAlreadyBurned[parentMap[temp]])
+                {
+                    q.push(parentMap[temp]);
+                    isAlreadyBurned[parentMap[temp]] = true;
+                    isBurnSpreaded = true;
+                }
+            }
+            if (isBurnSpreaded)
+                time++;
+        }
+        return time;
+    }
+
+    int minTime(Node *root, int target)
+    {
+        unordered_map<Node *, Node *> parentMap;                              // Node to parent mapping
+        Node *BurnNode = findBurnNodeAndMakeMapping(root, parentMap, target); // return the address of target node
+
+        return BurnTree(BurnNode, parentMap);
     }
 };
